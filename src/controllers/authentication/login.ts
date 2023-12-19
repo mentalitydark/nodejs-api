@@ -31,7 +31,7 @@ export async function login(req: express.Request, res: express.Response) {
 
     await user.save()
 
-    res.cookie(process.env.COOKIE_AUTH, user.authentication.sessionToken, { domain: 'localhost', path: '/' })
+    res.cookie(process.env.COOKIE_AUTH, user.authentication.sessionToken)
 
     return res.status(StatusCodes.OK).json(user).end()
   } catch (err) {

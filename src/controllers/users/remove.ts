@@ -7,10 +7,6 @@ export async function remove(req: express.Request, res: express.Response) {
   try {
     const { id } = req.params
 
-    const userExists = await getUserById(id)
-    if (!userExists)
-      return new NotFound(res, { title: 'User does not exist', instance: `/api/users/${id}`})
-
     const deletedUser = await deleteUserById(id)
     return res.status(StatusCodes.OK).json(deletedUser)
   } catch (err) {

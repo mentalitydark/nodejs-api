@@ -10,12 +10,12 @@ export async function isAuthenticated(req: express.Request, res: express.Respons
     const sessionToken = req.cookies[process.env.COOKIE_AUTH]
 
     if (!sessionToken)
-      return new Forbidden(res, { title: 'Authentication required' })
+      return new Forbidden(res, { title: 'Authentication required', instance: req.url })
 
     const existingUser = await getUserBySessionToken(sessionToken)
 
     if (!existingUser)
-      return new Forbidden(res, { title: 'Authentication required' })
+      return new Forbidden(res, { title: 'Authentication required', instance: req.url })
 
       merge(req, { identity: existingUser })
 
